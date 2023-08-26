@@ -30,7 +30,7 @@ after_initialize do
     def avatar
       user = User.find_by(username_lower: params[:username].downcase)
       if user
-        return redirect_to Discourse.base_url + user.avatar_template.sub('{size}','200') 
+        return redirect_to Discourse.base_url + user.avatar_template.sub('{size}','200')
       else
         return redirect_to Discourse.base_url + '/images/avatar.png'
       end
@@ -56,7 +56,7 @@ after_initialize do
           info = {
             service: service,
             username: current_user.username,
-            name: current_user.name || current_user.username,
+            name: current_user.username,
             email: current_user.email
           }
           Discourse.redis.setex("cas_#{ticket}", 600, info.to_json)
